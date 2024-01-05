@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 18
       - name: Install Thor
-        run: gem install thor
+        run: gem install thor --user-install
 
       - name: Run fog
         run: ruby bin/fog index ../docs/tests/*
