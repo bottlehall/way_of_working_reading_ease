@@ -11,23 +11,13 @@ def fog_index(text)
   word = ''
 
   text.chars.each do |ch|
-    if ch == ' '
+    if ch == ' ' || '?!.-;'.scan(ch).count.positive?
       if in_word
         word_count += 1
         complex_word_count += 1 if ComplexWord.new(word).complex?
         in_word = false
         word = ''
       end
-
-    elsif '?!.-;'.scan(ch).count.positive?
-      if in_word
-        word_count += 1
-        sentence_count += 1
-        complex_word_count += 1 if ComplexWord.new(word).complex?
-        in_word = false
-        word = ''
-      end
-
     elsif ch.match?(/[[:alpha:]]/)
       in_word = true
       word += ch
