@@ -5,40 +5,35 @@ require_relative 'complex-word'
 
 def fog_index(text)
   word_count = 0
-  word_count_in_sentence = 0
   sentence_count = 0
   complex_word_count = 0
-  current_word_length = 0
+  in_word = false
   word = ''
 
   text.chars.each do |ch|
-    # if first space then increment word count otherwise ignore
     if ch == ' '
-      if current_word_length.positive?
-        word_count_in_sentence += 1
+      if in_word
+        word_count += 1
         complex_word_count += 1 if ComplexWord.new(word).complex?
-        current_word_length = 0
+        in_word = false
         word = ''
       end
 
-    # check for sentence terminators
-    elsif '?!.-;'.scan(ch).count != 0
-      if current_word_length.positive?
-        word_count += word_count_in_sentence + 1
-        word_count_in_sentence = 0
+    elsif '?!.-;'.scan(ch).count.positive?
+      if in_word
+        word_count += 1
         sentence_count += 1
         complex_word_count += 1 if ComplexWord.new(word).complex?
-        current_word_length = 0
+        in_word = false
         word = ''
       end
 
-    elsif ch.match?(/[[:alpha:]]/) # && current_word_length != 0
-      current_word_length += 1
+    elsif ch.match?(/[[:alpha:]]/)
+      in_word = true
       word += ch
     end
   end
 
-  word_count += word_count_in_sentence
   words_per_sentence = sentence_count.positive? ? (Float(word_count) / Float(sentence_count)) : Float(word_count)
   pc_complex_words = word_count.positive? ? (Float(complex_word_count) / Float(word_count)) * 100.0 : 0.0
   (words_per_sentence + pc_complex_words) * 0.4
@@ -47,16 +42,15 @@ end
 def interpret_fog_index(value, threshold)
   return if value < threshold
 
-  value = value.round
   levels = { 16 => 'graduate', 12 => 'undergraduate', 8 => 'secondary', 6 => 'KS4', 0 => 'KS1-3' }
   description = ''
   levels.each do |level, desc|
-    if value > level
+    if value.round > level
       description = desc
       break
     end
   end
-  "#{description} (#{value})"
+  "#{description} (#{value.round})"
 end
 
 threshold = 0
