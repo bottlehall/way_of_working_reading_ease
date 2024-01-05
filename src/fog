@@ -1,0 +1,92 @@
+#!/usr/bin/ruby
+# frozen_string_literal: true
+
+require_relative 'complex-word'
+
+def fog_index(text)
+  word_count = 0
+  word_count_in_sentence = 0
+  sentence_count = 0
+  complex_word_count = 0
+  current_word_length = 0
+  word = ''
+
+  text.chars.each do |ch|
+    # if first space then increment word count otherwise ignore
+    if ch == ' '
+      if current_word_length.positive?
+        word_count_in_sentence += 1
+        complex_word_count + 1 if complex?(word)
+        current_word_length = 0
+        word = ''
+      end
+
+    # check for sentence terminators
+    elsif '?!.-;'.scan(ch).count != 0
+      if current_word_length.positive?
+        word_count += word_count_in_sentence + 1
+        word_count_in_sentence = 0
+        sentence_count += 1
+        complex_word_count + 1 if complex?(word)
+        current_word_length = 0
+        word = ''
+      end
+
+    # if not alphanumeric and not in a word then ignore
+    elsif !ch.match?(/[[:alpha:]]/) && current_word_length != 0
+      3
+    # if character in a word, then increment word length
+    else
+      current_word_length += 1
+      word += ch
+    end
+  end
+
+  word_count += word_count_in_sentence
+  # calculate the fog index and return as the function value
+  words_per_sentence = sentence_count.positive? ? (Float(word_count) / Float(sentence_count)) : Float(word_count)
+  pc_complex_words = word_count.positive? ? (Float(complex_word_count) / Float(word_count)) * 100.0 : 0.0
+  # puts( "text = #{text}\nwords = #{word_count}, complex_word_count = #{complex_word_count}" )
+  # puts( "sentences =#{sentence_count}, fog =#{(words_per_sentence + pc_complex_words) * 0.4}");
+  (words_per_sentence + pc_complex_words) * 0.4
+end
+
+def interpret_fog_index(value, threshold)
+  value = value.round
+  return if value < threshold
+
+  levels = { 17 => 'College graduate', 16 => 'College senior', 15 => 'College junior', 14 => 'College sophomore',
+             13 => 'College freshman', 12 => 'High school senior', 11 => 'High school junior',
+             10 => 'High school sophomore', 9 => 'High school freshman', 8 => 'Eighth grade',
+             7 => 'Seventh grade', 6 => 'Sixth grade' }
+  if (message = levels[value])
+    message
+  elsif value < 6
+    'Simple'
+  else
+    'Very Complex'
+  end
+end
+
+threshold = 0
+ARGV.each do |arg|
+  if arg == '--help'
+    puts "fog --help
+      Displays this message.
+  fog files...
+      Reports the reading level of each file specified.
+  fog --threshold=n files...
+      Reports the reading level of each file where the level meets or exceeds the threshold"
+    exit
+  end
+
+  ARGV.delete(arg) if arg == '--threshold='
+end
+
+puts 'No files specified' if ARGV.count.zero?
+
+ARGV.each do |filepath|
+  text = File.read(filepath)
+  interpretation = interpret_fog_index(fog_index(text), threshold)
+  puts "#{filepath}: #{interpretation}" unless interpretation.nil?
+end
