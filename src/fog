@@ -55,17 +55,9 @@ def interpret_fog_index(value, threshold)
   value = value.round
   return if value < threshold
 
-  levels = { 17 => 'College graduate', 16 => 'College senior', 15 => 'College junior', 14 => 'College sophomore',
-             13 => 'College freshman', 12 => 'High school senior', 11 => 'High school junior',
-             10 => 'High school sophomore', 9 => 'High school freshman', 8 => 'Eighth grade',
-             7 => 'Seventh grade', 6 => 'Sixth grade' }
-  if (message = levels[value])
-    message
-  elsif value < 6
-    'Simple'
-  else
-    'Very Complex'
-  end
+  levels = { 16 => 'graduate', 12 => 'undergraduate', 8 => 'secondary', 6 => 'KS4', 0 => 'KS1-3' }
+
+  levels.each { |level, description| return description if value > level }
 end
 
 threshold = 0
