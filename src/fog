@@ -16,7 +16,7 @@ def fog_index(text)
     if ch == ' '
       if current_word_length.positive?
         word_count_in_sentence += 1
-        complex_word_count + 1 if complex?(word)
+        complex_word_count += 1 if ComplexWord.new(word).complex?
         current_word_length = 0
         word = ''
       end
@@ -27,37 +27,36 @@ def fog_index(text)
         word_count += word_count_in_sentence + 1
         word_count_in_sentence = 0
         sentence_count += 1
-        complex_word_count + 1 if complex?(word)
+        complex_word_count += 1 if ComplexWord.new(word).complex?
         current_word_length = 0
         word = ''
       end
 
-    # if not alphanumeric and not in a word then ignore
-    elsif !ch.match?(/[[:alpha:]]/) && current_word_length != 0
-      3
-    # if character in a word, then increment word length
-    else
+    elsif ch.match?(/[[:alpha:]]/) # && current_word_length != 0
       current_word_length += 1
       word += ch
     end
   end
 
   word_count += word_count_in_sentence
-  # calculate the fog index and return as the function value
   words_per_sentence = sentence_count.positive? ? (Float(word_count) / Float(sentence_count)) : Float(word_count)
   pc_complex_words = word_count.positive? ? (Float(complex_word_count) / Float(word_count)) * 100.0 : 0.0
-  # puts( "text = #{text}\nwords = #{word_count}, complex_word_count = #{complex_word_count}" )
-  # puts( "sentences =#{sentence_count}, fog =#{(words_per_sentence + pc_complex_words) * 0.4}");
   (words_per_sentence + pc_complex_words) * 0.4
 end
 
 def interpret_fog_index(value, threshold)
-  value = value.round
   return if value < threshold
 
+  value = value.round
   levels = { 16 => 'graduate', 12 => 'undergraduate', 8 => 'secondary', 6 => 'KS4', 0 => 'KS1-3' }
-
-  levels.each { |level, description| return description if value > level }
+  description = ''
+  levels.each do |level, desc|
+    if value > level
+      description = desc
+      break
+    end
+  end
+  "#{description} (#{value})"
 end
 
 threshold = 0
