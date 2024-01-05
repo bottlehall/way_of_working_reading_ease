@@ -1,0 +1,14 @@
+#!/opt/homebrew/opt/ruby/bin/ruby
+
+require_relative "fog.rb"
+require "thor"
+
+class Fog < Thor
+  class_option :threshold, :default => 0, :aliases => "-t", :desc => "Do not report files with index below threshold"
+  desc "index FILES", "Calculate the Gunning-Fog Index for individual files"
+  def index(*filepaths)
+    FogIndex.new( filepaths, options[:threshold].to_i )
+  end
+end
+
+Fog.start(ARGV)
