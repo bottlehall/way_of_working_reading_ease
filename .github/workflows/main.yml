@@ -17,4 +17,4 @@ jobs:
           node-version: 18
 
       - name: Run fog
-        run: ruby bin/fog
+        run: ruby bin/fog index ../docs/tests/*
