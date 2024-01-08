@@ -21,7 +21,7 @@ jobs:
         run: gem install odyssey --user-install
 
       - name: Run Flesch Kincaid
-        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkre index docs/tests/primary/* >> $GITHUB_ENV
+        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkgl index docs/tests/primary/* >> $GITHUB_ENV
 
       - name: Run Gunning Fog
         run: THOR_SILENCE_DEPRECATION=1 ruby bin/fog index docs/tests/primary/* >> $GITHUB_ENV
