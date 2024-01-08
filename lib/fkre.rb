@@ -13,7 +13,7 @@ class FleschKincaid
 
     worst_score = scores.max_by { |score| score['score'] }['score'].round
     print("FK_SCORE=#{worst_score}")
-  end
+  endq
 
   def interpret_flesch_kincaid(value, threshold)
     return if value < threshold
