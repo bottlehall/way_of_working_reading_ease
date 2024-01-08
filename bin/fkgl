@@ -1,14 +1,12 @@
-#!/opt/homebrew/opt/ruby/bin/ruby
-
 require 'odyssey'
-require_relative '../lib/fkre.rb'
+require_relative '../lib/fkgl.rb'
 require "thor"
 
-class Fkre < Thor
+class FK < Thor
   desc "index FILES", "Calculate the worst Flesch-Kincaid Grade Level for the supplied files"
   def index(*filepaths)
     FleschKincaid.new(filepaths)
   end
 end
 
-Fkre.start(ARGV)
+FK.start(ARGV)

@@ -4,7 +4,7 @@
 require_relative 'interpret_score'
 
 # Wrapper class to link Thor CLI with the code for each file being indexed.
-class FogIndex
+class GunningFog
   def initialize(filepaths, _threshold = 0)
     scores = filepaths.map do |filepath|
       text = File.read(filepath)

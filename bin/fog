@@ -1,13 +1,11 @@
-#!/opt/homebrew/opt/ruby/bin/ruby
-
 require_relative "../lib/fog.rb"
 require "thor"
 
-class Fog < Thor
+class GF < Thor
   desc "index FILES", "Calculate the worst Gunning Fog Grade Level for the supplied files"
   def index(*filepaths)
-    FogIndex.new(filepaths)
+    GunningFog.new(filepaths)
   end
 end
 
-Fog.start(ARGV)
+GF.start(ARGV)
