@@ -6,7 +6,7 @@ class FleschKincaid
   def initialize(filepaths, threshold = 0)
     scores = filepaths.map { |filepath|
       text = File.read(filepath)
-      Odyssey.flesch_kincaid_re(text, true)
+      Odyssey.flesch_kincaid_gl(text, true)
     }
 
     worst_score = scores.min_by { |score| score['score'] }['score'].round
