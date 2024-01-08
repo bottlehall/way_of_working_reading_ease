@@ -11,7 +11,7 @@ class FogIndex
       fog_index(text.downcase)
     }
     worst_score = scores.max().round
-    print("GF_SCORE=#{interpret_score(worst_score)}")
+    print("GF_SCORE=#{worst_score}")
   end
 
   def calculate_index(sentence_count, word_count, complex_word_count)
