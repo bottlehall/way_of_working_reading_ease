@@ -5,10 +5,9 @@ require_relative '../src/fkre.rb'
 require "thor"
 
 class Fkre < Thor
-  class_option :threshold, :default => "0", :aliases => "-t", :desc => "Do not report files with index below threshold"
-  desc "index FILES", "Calculate the Flesch-Kincaid Reading Ease for individual files"
+  desc "index FILES", "Calculate the worst Flesch-Kincaid Grade Level for the supplied files"
   def index(*filepaths)
-    FleschKincaid.new( filepaths, options[:threshold].to_i )
+    FleschKincaid.new(filepaths)
   end
 end
 

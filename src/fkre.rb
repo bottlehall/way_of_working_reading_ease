@@ -1,6 +1,8 @@
 #!/usr/bin/ruby
 # frozen_string_literal: true
 
+require_relative 'interpret_score.rb'
+
 # Wrapper class to link Thor CLI with the code for each file being indexed.
 class FleschKincaid
   def initialize(filepaths, threshold = 0)
@@ -9,10 +11,8 @@ class FleschKincaid
       Odyssey.flesch_kincaid_gl(text, true)
     }
 
-    worst_score = scores.min_by { |score| score['score'] }['score'].round
-    print("FK_SCORE=#{worst_score}")
-    # puts(scores.sort_by! { |score| score['score'] })
-    # puts "#{filepath}: #{interpretation}" unless interpretation.nil?
+    worst_score = scores.max_by { |score| score['score'] }['score'].round
+    print("FK_SCORE=#{interpret_score(worst_score)}")
   end
 
   def interpret_flesch_kincaid(value, threshold)

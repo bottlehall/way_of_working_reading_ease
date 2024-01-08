@@ -1,14 +1,17 @@
 #!/usr/bin/ruby
 # frozen_string_literal: true
 
+require_relative 'interpret_score.rb'
+
 # Wrapper class to link Thor CLI with the code for each file being indexed.
 class FogIndex
   def initialize(filepaths, threshold = 0)
-    filepaths.each do |filepath|
+    scores = filepaths.map { |filepath|
       text = File.read(filepath)
-      interpretation = interpret_fog_index(fog_index(text.downcase), threshold)
-      puts "#{filepath}: #{interpretation}" unless interpretation.nil?
-    end
+      fog_index(text.downcase)
+    }
+    worst_score = scores.max().round
+    print("GF_SCORE=#{interpret_score(worst_score)}")
   end
 
   def calculate_index(sentence_count, word_count, complex_word_count)
@@ -16,20 +19,6 @@ class FogIndex
     words_per_sentence = sentence_count.positive? ? word_count.to_f / sentence_count : word_count
     pc_complex_words = word_count.positive? ? (complex_word_count.to_f / word_count) * 100.0 : 0.0
     (words_per_sentence + pc_complex_words) * 0.4
-  end
-
-  def interpret_fog_index(value, threshold)
-    return if value < threshold
-
-    levels = { 16 => 'graduate', 12 => 'undergraduate', 8 => 'secondary', 6 => 'KS4', 0 => 'KS1-3' }
-    description = ''
-    levels.each do |level, desc|
-      if value.round > level
-        description = desc
-        break
-      end
-    end
-    "#{description} (#{value.round})"
   end
 
   def syllable_count(word)
