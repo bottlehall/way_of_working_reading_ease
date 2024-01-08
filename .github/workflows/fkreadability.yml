@@ -21,15 +21,15 @@ jobs:
         run: gem install odyssey --user-install
 
       - name: Run fk
-        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkre index --threshold 0 docs/tests/* 
+        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkre index --threshold 0 docs/tests/* >> $GITHUB_ENV
 
       - name: Create the Badge
         uses: schneegans/dynamic-badges-action@v1.7.0
         with:
           auth: ${{ secrets.BADGE_SECRET }}
-          gistID: <gist-ID>
-          filename: answer.json
-          label: The Answer
+          gistID: d81400f704f3ba54c9564e038b66c271
+          filename: badge.json
+          label: Readability Score
           message: is ${{ env.FK_SCORE }}
           valColorRange: ${{ env.FK_SCORE }}
           maxColorRange: 100
