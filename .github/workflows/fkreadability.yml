@@ -26,11 +26,11 @@ jobs:
       - name: Create the Badge
         uses: schneegans/dynamic-badges-action@v1.7.0
         with:
-        auth: ${{ secrets.BADGE_SECRET }}
-        gistID: <gist-ID>
-        filename: answer.json
-        label: The Answer
-        message: is ${{ env.FK_SCORE }}
-        valColorRange: ${{ env.FK_SCORE }}
-        maxColorRange: 100
-        minColorRange: -140
+          auth: ${{ secrets.BADGE_SECRET }}
+          gistID: <gist-ID>
+          filename: answer.json
+          label: The Answer
+          message: is ${{ env.FK_SCORE }}
+          valColorRange: ${{ env.FK_SCORE }}
+          maxColorRange: 100
+          minColorRange: -140
