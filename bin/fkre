@@ -1,0 +1,15 @@
+#!/opt/homebrew/opt/ruby/bin/ruby
+
+require 'odyssey'
+require_relative '../src/fkre.rb'
+require "thor"
+
+class Fkre < Thor
+  class_option :threshold, :default => "0", :aliases => "-t", :desc => "Do not report files with index below threshold"
+  desc "index FILES", "Calculate the Flesch-Kincaid Reading Ease for individual files"
+  def index(*filepaths)
+    FleschKincaid.new( filepaths, options[:threshold].to_i )
+  end
+end
+
+Fkre.start(ARGV)
