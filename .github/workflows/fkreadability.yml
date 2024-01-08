@@ -21,10 +21,10 @@ jobs:
         run: gem install odyssey --user-install
 
       - name: Run Flesch Kincaid
-        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkre index docs/tests/* >> $GITHUB_ENV
+        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkre index docs/tests/primary/* >> $GITHUB_ENV
 
       - name: Run Gunning Fog
-        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fog index docs/tests/* >> $GITHUB_ENV
+        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fog index docs/tests/primary/* >> $GITHUB_ENV
         
       # adapted from https://github.com/marketplace/actions/dynamic-badges
       - name: Create the FK Badge
@@ -35,7 +35,7 @@ jobs:
           filename: badgeFK.json
           label: Flesch-Kincaid Score
           message: ${{ env.FK_SCORE }}
-          invertColorRange: true
+          invertColorRange: false
           valColorRange: ${{ env.FK_SCORE }}
           maxColorRange: 24
           minColorRange: 0
@@ -49,7 +49,7 @@ jobs:
           filename: badgeGF.json
           label: Gunning-Fog Score
           message: ${{ env.GF_SCORE }}
-          invertColorRange: true
+          invertColorRange: false
           valColorRange: ${{ env.GF_SCORE }}
           maxColorRange: 24
           minColorRange: 0
