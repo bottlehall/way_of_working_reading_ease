@@ -5,8 +5,8 @@ on: push
 permissions: read-all
 
 jobs:
-  test_readabilityFK:
-    name: Flesch-Kincaid
+  test_readability:
+    name: Readability Checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -39,6 +39,7 @@ jobs:
           valColorRange: ${{ env.FK_SCORE }}
           maxColorRange: 24
           minColorRange: 0
+          forceUpdate: true
 
       - name: Create the GF Badge
         uses: schneegans/dynamic-badges-action@v1.7.0
@@ -52,3 +53,4 @@ jobs:
           valColorRange: ${{ env.GF_SCORE }}
           maxColorRange: 24
           minColorRange: 0
+          forceUpdate: true
