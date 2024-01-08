@@ -1,16 +1,16 @@
 #!/usr/bin/ruby
 # frozen_string_literal: true
 
-require_relative 'interpret_score.rb'
+require_relative 'interpret_score'
 
 # Wrapper class to link Thor CLI with the code for each file being indexed.
 class FogIndex
-  def initialize(filepaths, threshold = 0)
-    scores = filepaths.map { |filepath|
+  def initialize(filepaths, _threshold = 0)
+    scores = filepaths.map do |filepath|
       text = File.read(filepath)
       fog_index(text.downcase)
-    }
-    worst_score = scores.max().round
+    end
+    worst_score = scores.max.round
     print("GF_LEGEND=#{interpret_score(worst_score)}\nGF_COLOUR=green")
   end
 
@@ -33,7 +33,7 @@ class FogIndex
   def fog_index(text)
     complex_word_count = 0
     word_count = 0
-    sentences = text.split(/[\.\?\!;\-][\s]/)
+    sentences = text.split(/[.?!;-]\s/)
     sentences.each do |sentence|
       words = sentence.split(/[\s|,]+/)
       words.each do |word|
