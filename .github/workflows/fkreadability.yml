@@ -25,7 +25,8 @@ jobs:
 
       - name: Run Gunning Fog
         run: THOR_SILENCE_DEPRECATION=1 ruby bin/fog index docs/tests/* >> $GITHUB_ENV
-
+        
+      # adapted from https://github.com/marketplace/actions/dynamic-badges
       - name: Create the FK Badge
         uses: schneegans/dynamic-badges-action@v1.7.0
         with:
@@ -34,6 +35,7 @@ jobs:
           filename: badgeFK.json
           label: Flesch-Kincaid Score
           message: ${{ env.FK_SCORE }}
+          invertColorRange: true
           valColorRange: ${{ env.FK_SCORE }}
           maxColorRange: 24
           minColorRange: 0
@@ -46,6 +48,7 @@ jobs:
           filename: badgeGF.json
           label: Gunning-Fog Score
           message: ${{ env.GF_SCORE }}
+          invertColorRange: true
           valColorRange: ${{ env.GF_SCORE }}
           maxColorRange: 24
           minColorRange: 0
