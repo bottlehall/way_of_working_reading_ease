@@ -12,6 +12,6 @@ class FleschKincaid
     }
 
     worst_score = scores.max_by { |score| score['score'] }['score'].round
-    print("FK_SCORE=#{worst_score}")
+    print("FK_SCORE=#{worst_score} FK_LEGEND=\"#{interpret_score(worst_score)}\"")
   end
 end
