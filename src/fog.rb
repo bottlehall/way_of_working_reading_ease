@@ -1,13 +1,11 @@
 #!/usr/bin/ruby
 # frozen_string_literal: true
 
-require_relative 'complex-word'
-
 class FogIndex
   def initialize(filepaths, threshold = 0)
     filepaths.each do |filepath|
       text = File.read(filepath)
-      interpretation = interpret_fog_index(fog_index(text), threshold)
+      interpretation = interpret_fog_index(fog_index(text.downcase), threshold)
       puts "#{filepath}: #{interpretation}" unless interpretation.nil?
     end
   end
@@ -33,26 +31,26 @@ class FogIndex
     "#{description} (#{value.round})"
   end
   
+  def syllable_count(word)
+    word.downcase!
+    return 1 if word.length <= 3
+    word.sub!(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '')
+    word.sub!(/^y/, '')
+    word.scan(/[aeiouy]{1,2}/).size
+  end
+
   def fog_index(text)
-    word_count = sentence_count = complex_word_count = 0
-    in_word = false
-    word = ''
-  
-    text.chars.each do |ch|
-      if ch == ' ' || '?!.-;'.scan(ch).count.positive?
-        if in_word
-          word_count += 1
-          complex_word_count += 1 if ComplexWord.new(word).complex?
-          in_word = false
-          word = ''
-        end
-        sentence_count += 1 if ch != ' '
-      elsif ch.match?(/[[:alpha:]]/)
-        in_word = true
-        word += ch
+    complex_word_count = 0
+    word_count = 0
+    sentences = text.split /[\.\?\!;\-][\s]/
+    sentences.each do |sentence|
+      words = sentence.split(/[\s|,]+/)
+      words.each do |word|
+        complex_word_count += 1 if syllable_count(word) >= 3
       end
+      word_count += words.count
     end
-  
-    calculate_index(sentence_count, word_count, complex_word_count)
+
+    calculate_index(sentences.count, word_count, complex_word_count)
   end
 end
