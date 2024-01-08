@@ -1,0 +1,36 @@
+---
+name: "Readability - Odyssey"
+on: push
+
+permissions: read-all
+
+jobs:
+  test_readabilityFK:
+    name: Flesch-Kincaid
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      - name: Install Thor
+        run: gem install thor --user-install
+      - name: Install Odyssey
+        run: gem install odyssey --user-install
+
+      - name: Run fk
+        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkre index --threshold 0 docs/tests/* 
+
+      - name: Create the Badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.BADGE_SECRET }}
+          gistID: <gist-ID>
+          filename: answer.json
+          label: The Answer
+          message: is ${{ env.FK_SCORE }}
+          valColorRange: ${{ env.FK_SCORE }}
+          maxColorRange: 100
+          minColorRange: -140
