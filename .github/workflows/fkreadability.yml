@@ -5,7 +5,7 @@ on: push
 permissions: read-all
 
 jobs:
-  test_readability:
+  test_readabilityFK:
     name: Flesch-Kincaid
     runs-on: ubuntu-latest
     steps:
