@@ -1,6 +1,6 @@
 #!/opt/homebrew/opt/ruby/bin/ruby
 
-require_relative "../src/fog.rb"
+require_relative "../lib/fog.rb"
 require "thor"
 
 class Fog < Thor
