@@ -1,5 +1,5 @@
 ---
-name: "Readability - Odyssey"
+name: "Readability Checks"
 on: push
 
 permissions: read-all
