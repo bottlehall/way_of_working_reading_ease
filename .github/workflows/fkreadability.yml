@@ -49,6 +49,7 @@ jobs:
 
       - name: Fail if red
         if: ${{ env.FK_COLOUR }} = 'red'
-        run: |
-          echo "workflow terminated with error because a red badge arose"
-          exit 1
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('A red badge for readability arose!')
