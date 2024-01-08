@@ -21,7 +21,7 @@ jobs:
         run: gem install odyssey --user-install
 
       - name: Run fk
-        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkre index --threshold 0 docs/tests/* >> $GITHUB_ENV
+        run: THOR_SILENCE_DEPRECATION=1 ruby bin/fkre index --threshold 0 docs/tests/* 
 
       - name: Create the Badge
         uses: schneegans/dynamic-badges-action@v1.7.0
