@@ -34,7 +34,7 @@ jobs:
           gistID: d81400f704f3ba54c9564e038b66c271
           filename: badgeFK.json
           label: Flesch-Kincaid Score
-          message: ${{ env.FK_SCORE }}
+          message: ${{ env.FK_LEGEND }}
           invertColorRange: false
           valColorRange: ${{ env.FK_SCORE }}
           maxColorRange: 24
@@ -48,7 +48,7 @@ jobs:
           gistID: d81400f704f3ba54c9564e038b66c271
           filename: badgeGF.json
           label: Gunning-Fog Score
-          message: ${{ env.GF_SCORE }}
+          message: ${{ env.GF_LEGEND }}
           invertColorRange: false
           valColorRange: ${{ env.GF_SCORE }}
           maxColorRange: 24
