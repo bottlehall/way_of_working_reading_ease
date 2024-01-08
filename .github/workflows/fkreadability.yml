@@ -45,4 +45,4 @@ jobs:
           filename: badgeGF.json
           label: Gunning-Fog Score
           message: ${{ env.GF_LEGEND }}
-          color: ${{ env.FK_COLOUR }}
+          color: ${{ env.GF_COLOUR }}
