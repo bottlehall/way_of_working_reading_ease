@@ -45,4 +45,11 @@ jobs:
           filename: badgeGF.json
           label: Gunning-Fog Score
           message: ${{ env.GF_LEGEND }}
-          color: ${{ env.FK_COLOUR }}
+          color: ${{ env.GF_COLOUR }}
+
+      - name: Fail if red
+        if: ${{ env.FK_COLOUR == 'red' }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('A red badge for readability arose!')
