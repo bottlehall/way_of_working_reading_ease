@@ -30,7 +30,7 @@ jobs:
           gistID: d81400f704f3ba54c9564e038b66c271
           filename: badge.json
           label: Readability Score
-          message: is ${{ env.FK_SCORE }}
+          message: ${{ env.FK_SCORE }}
           valColorRange: ${{ env.FK_SCORE }}
           maxColorRange: 100
           minColorRange: -140
