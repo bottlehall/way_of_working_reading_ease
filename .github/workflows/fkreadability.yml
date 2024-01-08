@@ -46,3 +46,9 @@ jobs:
           label: Gunning-Fog Score
           message: ${{ env.GF_LEGEND }}
           color: ${{ env.GF_COLOUR }}
+
+      - name: Fail if red
+        if: ${{ env.FK_COLOUR }} == 'red'
+        run: |
+          echo "workflow terminated with error because a red badge arose"
+          exit 1
