@@ -9,7 +9,8 @@ class FleschKincaid
       Odyssey.flesch_kincaid_re(text, true)
     }
 
-    puts(scores.min_by { |score| score['score']}['score'].round)
+    worst_score = scores.min_by { |score| score['score'] }['score'].round
+    print("FK_SCORE=#{worst_score}")
     # puts(scores.sort_by! { |score| score['score'] })
     # puts "#{filepath}: #{interpretation}" unless interpretation.nil?
   end
