@@ -11,7 +11,8 @@ class FogIndex
       fog_index(text.downcase)
     end
     worst_score = scores.max.round
-    print("GF_LEGEND=#{interpret_score(worst_score)}\nGF_COLOUR=green")
+    colour =  worst_core > 25 ? 'red' : 'green'
+    print("GF_LEGEND=#{interpret_score(worst_score)}\nGF_COLOUR=#{colour}")
   end
 
   def calculate_index(sentence_count, word_count, complex_word_count)
