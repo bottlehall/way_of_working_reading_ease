@@ -49,7 +49,7 @@ jobs:
 
       - name: Fail if red
         if: ${{ env.FK_COLOUR == 'red' || env.GF_COLOUR == 'red' }}
-        uses: actions/github-script@v4
+        uses: actions/github-script@v7
         with:
           script: |
             core.setFailed('A red badge for readability arose!')
