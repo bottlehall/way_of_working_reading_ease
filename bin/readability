@@ -12,6 +12,13 @@ class ReadabilityAction < Thor
       exit
     end
 
+    filepaths.each do |filepath|
+      if !File.exist?(filepath)
+        print("FK_LEGEND=bad doc\nFK_COLOUR=red\nGF_LEGEND=bad doc\nGF_COLOUR=red")
+        exit
+      end
+    end
+
     FleschKincaid.new(filepaths)
     GunningFog.new(filepaths)
   end

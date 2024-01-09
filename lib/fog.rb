@@ -7,13 +7,10 @@ require_relative 'interpret_score'
 class GunningFog
   def initialize(filepaths)
     scores = filepaths.map do |filepath|
-      if !File.exist?(filepath)
-        print("FK_LEGEND=missing doc}\nFK_COLOUR=red")
-        exit
-      end
       text = File.read(filepath)
       fog_index(text.downcase)
     end
+    
     worst_score = scores.max.round
     colour =  worst_score > 25 ? 'red' : 'green'
     print("GF_LEGEND=#{interpret_score(worst_score)}\nGF_COLOUR=#{colour}")
