@@ -7,6 +7,9 @@ require_relative 'interpret_score'
 class FleschKincaid
   def initialize(filepaths, _threshold = 0)
     scores = filepaths.map do |filepath|
+      if !File.exist?(filepath)
+        print("FK_LEGEND=missing doc}\nFK_COLOUR=red")
+      end
       text = File.read(filepath)
       Odyssey.flesch_kincaid_gl(text, true)
     end
