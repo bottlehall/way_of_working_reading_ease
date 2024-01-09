@@ -9,7 +9,7 @@ class FleschKincaid
     scores = filepaths.map do |filepath|
       if !File.exist?(filepath)
         print("FK_LEGEND=missing doc}\nFK_COLOUR=red")
-        exitx
+        exit
       end
       text = File.read(filepath)
       Odyssey.flesch_kincaid_gl(text, true)
