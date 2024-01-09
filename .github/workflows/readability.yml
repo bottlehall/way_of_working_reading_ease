@@ -1,5 +1,5 @@
 ---
-name: "Readability"
+name: Readability
 on: push
 
 permissions: read-all

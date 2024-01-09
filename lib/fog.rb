@@ -10,10 +10,10 @@ class GunningFog
       text = File.read(filepath)
       fog_index(text.downcase)
     end
-    
+
     worst_score = scores.max.round
     colour =  worst_score > 25 ? 'red' : 'green'
-    print("GF_LEGEND=#{interpret_score(worst_score)}\nGF_COLOUR=#{colour}")
+    print("GF_LEGEND=#{interpret_score(worst_score)}\nGF_COLOUR=#{colour}\n")
   end
 
   def calculate_index(sentence_count, word_count, complex_word_count)
