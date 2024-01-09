@@ -9,6 +9,7 @@ class GunningFog
     scores = filepaths.map do |filepath|
       if !File.exist?(filepath)
         print("FK_LEGEND=missing doc}\nFK_COLOUR=red")
+        exit
       end
       text = File.read(filepath)
       fog_index(text.downcase)
