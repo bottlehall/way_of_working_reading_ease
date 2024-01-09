@@ -12,7 +12,7 @@ class GunningFog
     end
 
     worst_score = scores.max.round
-    colour =  worst_score > 25 ? 'red' : 'green'
+    colour = worst_score > 25 ? 'red' : 'green'
     print("GF_LEGEND=#{interpret_score(worst_score)}\nGF_COLOUR=#{colour}\n")
   end
 
