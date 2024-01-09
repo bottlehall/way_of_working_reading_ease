@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "reading_ease/version"
+require_relative 'reading_ease/version'
 
 module WayOfWorking
   module ReadingEase
