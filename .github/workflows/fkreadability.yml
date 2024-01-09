@@ -21,7 +21,7 @@ jobs:
         run: gem install odyssey --user-install
 
       - name: Run Flesch Kincaid and Gunning Fog
-        run: THOR_SILENCE_DEPRECATION=1 ruby bin/readability index docs/tests/primar >> $GITHUB_ENV
+        run: THOR_SILENCE_DEPRECATION=1 ruby bin/readability index docs/tests/secondary/* >> $GITHUB_ENV
 
       # adapted from https://github.com/marketplace/actions/dynamic-badges
       - name: Create the FK Badge
