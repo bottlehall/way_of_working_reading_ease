@@ -26,7 +26,7 @@ jobs:
         with:
           match-directories: false
           files: |
-            docs/tests/**
+            docs/**
 
       - name: Run Flesch Kincaid and Gunning Fog
         run: THOR_SILENCE_DEPRECATION=1 ruby bin/readability index ${{ steps.docs.outputs.paths }} >> $GITHUB_ENV
