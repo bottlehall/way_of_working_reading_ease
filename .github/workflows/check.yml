@@ -15,12 +15,64 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-      - name: save output
-        id: s1
+          
+      - name: Match docs
+        uses: tj-actions/glob@v18
+        id: docs
+        with:
+          match-directories: false
+          files: |
+            docs/**
+            
+      - name: Run Flesch-Kincaid
+        id: fk
         uses: k1LoW/github-script-ruby@v2
         with:
           result-encoding: string
           script: |
-            return "EN1=green\nEN2=red\n"
-      - name: check env
-        run: echo ${{ steps.s1.outputs.result }}
+            filepaths = ${{ steps.docs.outputs.paths }}
+            if filepaths.count == 0
+              return "FK_LEGEND=no docs\nFK_COLOUR=green\nGF_LEGEND=no docs\nGF_COLOUR=green"
+            end
+            scores = filepaths.map do |filepath|
+              text = File.read(filepath)
+              Odyssey.flesch_kincaid_gl(text, true)
+            end
+
+            worst_score = scores.max_by { |score| score['score'] }['score'].round
+            colour = worst_score > 25 ? 'red' : 'green'
+            return "FK_LEGEND=#{interpret_score(worst_score)}\nFK_COLOUR=#{colour}\n"
+          gemfile: |
+            - source 'https://rubygems.org'
+              gem 'odyssey'
+      
+      - name: Save result of step fk to environment
+        run: echo ${{ steps.fk.outputs.result }} >> $GITHUB_ENV
+
+      # adapted from https://github.com/marketplace/actions/dynamic-badges
+      - name: Create the FK Badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.BADGE_SECRET }}
+          gistID: d81400f704f3ba54c9564e038b66c271
+          filename: badgeFK.json
+          label: Flesch-Kincaid Score
+          message: ${{ env.FK_LEGEND }}
+          color: ${{ env.FK_COLOUR }}
+
+      - name: Create the GF Badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.BADGE_SECRET }}
+          gistID: d81400f704f3ba54c9564e038b66c271
+          filename: badgeGF.json
+          label: Gunning-Fog Score
+          message: ${{ env.GF_LEGEND }}
+          color: ${{ env.GF_COLOUR }}
+
+      - name: Fail if red
+        if: ${{ env.FK_COLOUR == 'red' || env.GF_COLOUR == 'red' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            core.setFailed('A red badge for readability arose!')
