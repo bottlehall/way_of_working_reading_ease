@@ -57,8 +57,8 @@ jobs:
           gistID: d81400f704f3ba54c9564e038b66c271
           filename: badgeFK.json
           label: Flesch-Kincaid Score
-          message: ${{ env.FK_COLOUR.split(",", 1)[1] }}
-          color: ${{ env.FK_COLOUR.split(",", 1)[0] }}
+          message: ${{ env.FK_COLOUR }}
+          color: ${{ env.FK_COLOUR }}
           
       - name: Fail if red
         if: ${{ env.FK_COLOUR.split(",", 1)[0] == 'red' || env.GF_COLOUR == 'red' }}
