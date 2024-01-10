@@ -1,12 +1,12 @@
 ---
-name: Readability
+name: Check Output Env
 on: push
 
 permissions: read-all
 
 jobs:
   test_readability:
-    name: Readability Checks
+    name: Passing Checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,6 +22,6 @@ jobs:
           script: |
             print("EN1=green\nEN2=red\n")
       - name: use output
-        run: echo ${{ steps.s1.outputs }} >> $GITHUB_ENV
+        run: echo ${{ steps.s1.outputs.paths }} >> $GITHUB_ENV
       - name: check env
         run: echo ${{ env.EN1 }}
