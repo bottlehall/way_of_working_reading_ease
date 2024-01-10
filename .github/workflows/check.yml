@@ -1,0 +1,27 @@
+---
+name: Readability
+on: push
+
+permissions: read-all
+
+jobs:
+  test_readability:
+    name: Readability Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: save output
+        id: s1
+        uses: k1LoW/github-script-ruby@v2
+          with:
+            script: |
+              print("EN1=green\nEN2=red\n")
+      - name: use output
+        run: echo ${{ steps.s1.outputs }} >> $GITHUB_ENV
+      - name: check env
+        run: echo ${{ env.EN1 }}
