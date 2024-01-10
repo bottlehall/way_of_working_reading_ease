@@ -22,4 +22,4 @@ jobs:
           script: |
             print("EN1=green\nEN2=red\n")
       - name: check env
-        run: echo ${{ steps.outputs }}
+        run: echo ${{ steps.s1.outputs }}
