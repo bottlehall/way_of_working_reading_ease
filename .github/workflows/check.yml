@@ -28,7 +28,6 @@ jobs:
         id: fk
         uses: k1LoW/github-script-ruby@v2
         with:
-          result-encoding: string
           script: |
             require 'odyssey'
             filepaths = %w(${{ steps.docs.outputs.paths }})
@@ -42,7 +41,7 @@ jobs:
 
             worst_score = scores.max_by { |score| score['score'] }['score'].round
             colour = worst_score > 25 ? 'red' : 'green'
-            return "FK_LEGEND=#{worst_score}\\nFK_COLOUR=#{colour}"
+            return "FK_LEGEND=#{worst_score}\nFK_COLOUR=#{colour}"
           gemfile: |
             source 'https://rubygems.org'
             gem 'odyssey'
