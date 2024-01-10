@@ -41,7 +41,7 @@ jobs:
 
             worst_score = scores.max_by { |score| score['score'] }['score'].round
             colour = worst_score > 25 ? 'red' : 'green'
-            return "FK_LEGEND=#{worst_score}" + '\\n' + "FK_COLOUR=#{colour}"
+            return ""FK_COLOUR=#{colour}",FK_LEGEND=#{worst_score}" +
           gemfile: |
             source 'https://rubygems.org'
             gem 'odyssey'
@@ -57,11 +57,11 @@ jobs:
           gistID: d81400f704f3ba54c9564e038b66c271
           filename: badgeFK.json
           label: Flesch-Kincaid Score
-          message: ${{ env.FK_LEGEND }}
-          color: ${{ env.FK_COLOUR }}
+          message: ${{ env.FK_COLOUR.split(",", 1)[1] }}
+          color: ${{ env.FK_COLOUR.split(",", 1)[0] }}
           
       - name: Fail if red
-        if: ${{ env.FK_COLOUR == 'red' || env.GF_COLOUR == 'red' }}
+        if: ${{ env.FK_COLOUR.split(",", 1)[0] == 'red' || env.GF_COLOUR == 'red' }}
         uses: actions/github-script@v7
         with:
           script: |
