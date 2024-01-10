@@ -1,12 +1,12 @@
 ---
-name: Check Output Env
+name: Readability Checks
 on: push
 
 permissions: read-all
 
 jobs:
   test_readability:
-    name: Passing Checks
+    name: Readability Checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -41,7 +41,7 @@ jobs:
 
             worst_score = scores.max_by { |score| score['score'] }['score'].round
             colour = worst_score > 25 ? 'red' : 'green'
-            return "FK_LEGEND=#{worst_score}\nFK_COLOUR=#{colour}"
+            return "FK_LEGEND=#{worst_score}" + '\n' + "FK_COLOUR=#{colour}"
           gemfile: |
             source 'https://rubygems.org'
             gem 'odyssey'
