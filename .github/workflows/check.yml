@@ -61,7 +61,7 @@ jobs:
           color: ${{ env.FK_COLOUR }}
           
       - name: Fail if red
-        if: ${{ env.FK_COLOUR.split(",", 1)[0] == 'red' || env.GF_COLOUR == 'red' }}
+        if: ${{ env.FK_COLOUR == 'red' || env.GF_COLOUR == 'red' }}
         uses: actions/github-script@v7
         with:
           script: |
