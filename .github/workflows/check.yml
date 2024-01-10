@@ -20,6 +20,6 @@ jobs:
         uses: k1LoW/github-script-ruby@v2
         with:
           script: |
-            print("EN1=green\nEN2=red\n")  >> $GITHUB_ENV
+            print("EN1=green\nEN2=red\n")
       - name: check env
-        run: echo ${{ env.EN1 }}
+        run: echo ${{ steps.outputs }}
