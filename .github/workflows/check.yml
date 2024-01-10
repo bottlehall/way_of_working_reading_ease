@@ -18,9 +18,9 @@ jobs:
       - name: save output
         id: s1
         uses: k1LoW/github-script-ruby@v2
-          with:
-            script: |
-              print("EN1=green\nEN2=red\n")
+        with:
+          script: |
+            print("EN1=green\nEN2=red\n")
       - name: use output
         run: echo ${{ steps.s1.outputs }} >> $GITHUB_ENV
       - name: check env
