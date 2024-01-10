@@ -30,7 +30,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            filepaths = ${{ steps.docs.outputs.paths }}
+            filepaths = %w(${{ steps.docs.outputs.paths }})
             if filepaths.count == 0
               return "FK_LEGEND=no docs\nFK_COLOUR=green\nGF_LEGEND=no docs\nGF_COLOUR=green"
             end
