@@ -19,7 +19,8 @@ jobs:
         id: s1
         uses: k1LoW/github-script-ruby@v2
         with:
+          result-encoding: string
           script: |
-            print("EN1=green\nEN2=red\n")
+            return "EN1=green\nEN2=red\n"
       - name: check env
         run: echo ${{ steps.s1.outputs.result }}
