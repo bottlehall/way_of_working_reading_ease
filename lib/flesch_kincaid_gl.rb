@@ -9,6 +9,8 @@ class FleschKincaid
       score = Odyssey.flesch_kincaid_gl(text, true)
       if !_badges and score['score'] >= _threshold
         puts( "#{filepath} #{score['score']}")
+      else
+        score
       end
     end
 
