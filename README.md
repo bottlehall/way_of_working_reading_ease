@@ -3,7 +3,6 @@
 <!-- HDI Way of Working: Badge Holder Start -->
 [![HDI Way of Working](https://img.shields.io/badge/HDI-Way%20of%20Working-8169e3?labelColor=000)](https://healthdatainsight.github.io/way_of_working/)
 [![Inclusive Language](https://github.com/HealthDataInsight/hdi_backpack_ros2_ws/actions/workflows/inclusive-language.yml/badge.svg)](https://github.com/HealthDataInsight/hdi_backpack_ros2_ws/actions/workflows/inclusive-language.yml)
-![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bottlehall/d81400f704f3ba54c9564e038b66c271/raw/badgeGF.json)
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bottlehall/d81400f704f3ba54c9564e038b66c271/raw/badgeFK.json)
 <!-- HDI Way of Working: Badge Holder End -->
 
