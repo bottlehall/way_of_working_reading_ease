@@ -8,7 +8,7 @@
 
 ## Setup
 
-The default behaviour is to check all files in the repository's `docs` folder on 'push'. To change this, edit the file `readability.yml` in the `.github/workflow` folder.
+The default behaviour is to check all files in the repository's `docs` folder on 'push'. To change this, edit the file `reading_ease.yml` in the `.github/workflow` folder.
 
 ## Execution
 
