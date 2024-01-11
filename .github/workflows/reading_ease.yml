@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 18
       - name: Install Find
-        run: gem install Find --user-install
+        run: gem install find --user-install
       - name: Install Thor
         run: gem install thor --user-install
       - name: Install Odyssey
