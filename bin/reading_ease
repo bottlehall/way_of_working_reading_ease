@@ -1,4 +1,3 @@
-require 'Find'
 require 'odyssey'
 require 'thor'
 

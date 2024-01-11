@@ -1,8 +1,6 @@
 #!/usr/bin/ruby
 # frozen_string_literal: true
 
-require_relative 'interpret_score'
-
 # Wrapper class to link Thor CLI with the code for each file being indexed.
 class FleschKincaid
   def initialize(filepaths, _badges = false, _threshold = 0)
