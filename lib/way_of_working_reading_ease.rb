@@ -10,7 +10,7 @@ class ReadabilityAction < Thor
   def index(*filepaths)
     if filepaths.count == 0
       if options[:badges] 
-        print("FK_LEGEND=no docs\nFK_COLOUR=green\nGF_LEGEND=no docs\nGF_COLOUR=green")
+        puts("FK_LEGEND=no docs\nFK_COLOUR=green")
       else
         puts("No document files found")
       end
