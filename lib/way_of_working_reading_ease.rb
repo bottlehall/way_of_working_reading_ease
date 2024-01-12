@@ -20,7 +20,7 @@ class ReadabilityAction < Thor
     # this is done for us if files are supplied by workflow
     if !options[:badges]
       filepaths = filepaths.map { |filepath| File.directory?(filepath) ? Dir.glob(filepath+'/**/*') : filepath }
-      filepaths = filepaths.flatten!.reject {|d| File.directory?(d) }
+      filepaths = filepaths.flatten.reject {|d| File.directory?(d) }
     end
 
     FleschKincaid.new(filepaths, options[:badges], options[:threshold].to_i)
