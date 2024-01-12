@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name = 'way_of_working-reading_ease'
   spec.version = WayOfWorking::ReadingEase::VERSION
   spec.authors = ['Nick Robinson', 'Tim Gentry']
-  spec.email = ['52189+timgentry@users.noreply.github.com']
+  spec.email = ['5624261+bottlehall@users.noreply.github.com', '52189+timgentry@users.noreply.github.com']
 
   spec.summary = 'Way of Working add-on for reading ease tests'
   spec.description = 'This gem adds Flesch–Kincaid and Gunning Fog reading ease tests ' \
