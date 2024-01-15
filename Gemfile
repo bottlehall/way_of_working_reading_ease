@@ -8,3 +8,4 @@ gemspec
 gem 'rake', '~> 13.0'
 
 gem 'minitest', '~> 5.16'
+gem 'way_of_working', git: 'https://github.com/HealthDataInsight/way_of_working.git', branch: 'feature/plugins'
