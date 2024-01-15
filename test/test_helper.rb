@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
-require 'way_of_working/reading_ease'
+require 'way_of_working/reading_ease/flesch_kincaid'
 
 require 'minitest/autorun'

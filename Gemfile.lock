@@ -13,7 +13,7 @@ GIT
 PATH
   remote: .
   specs:
-    way_of_working-reading_ease (0.1.0)
+    way_of_working-reading_ease-flesch_kincaid (0.1.0)
       way_of_working (~> 1.0)
 
 GEM
@@ -68,7 +68,7 @@ DEPENDENCIES
   minitest (~> 5.16)
   rake (~> 13.0)
   way_of_working!
-  way_of_working-reading_ease!
+  way_of_working-reading_ease-flesch_kincaid!
 
 BUNDLED WITH
    2.5.4

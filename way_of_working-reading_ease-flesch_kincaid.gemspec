@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
-require_relative 'lib/way_of_working/reading_ease/version'
+require_relative 'lib/way_of_working/reading_ease/flesch_kincaid/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'way_of_working-reading_ease'
-  spec.version = WayOfWorking::ReadingEase::VERSION
+  spec.name = 'way_of_working-reading_ease-flesch_kincaid'
+  spec.version = WayOfWorking::ReadingEase::FleschKincaid::VERSION
   spec.authors = ['Nick Robinson', 'Tim Gentry']
-  spec.email = ['5624261+bottlehall@users.noreply.github.com', '52189+timgentry@users.noreply.github.com']
+  spec.email = ['5624261+bottlehall@users.noreply.github.com',
+                '52189+timgentry@users.noreply.github.com']
 
   spec.summary = 'Way of Working add-on for reading ease tests'
-  spec.description = 'This gem adds Flesch–Kincaid and Gunning Fog reading ease tests ' \
-                     'to the way of working command line application.'
-  spec.homepage = 'https://github.com/HealthDataInsight/way_of_working-reading_ease'
+  spec.description = 'This gem adds Flesch–Kincaid reading ease test to the way of working ' \
+                     'command line tool.'
+  spec.homepage = 'https://github.com/HealthDataInsight/way_of_working-reading_ease-flesch_kincaid'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.6.0'
 
@@ -19,8 +20,8 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/HealthDataInsight/way_of_working-reading_ease'
-  spec.metadata['changelog_uri'] = 'https://github.com/HealthDataInsight/way_of_working-reading_ease/blob/main/CHANGELOG.md'
+  spec.metadata['source_code_uri'] = 'https://github.com/HealthDataInsight/way_of_working-reading_ease-flesch_kincaid'
+  spec.metadata['changelog_uri'] = 'https://github.com/HealthDataInsight/way_of_working-reading_ease-flesch_kincaid/blob/main/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
